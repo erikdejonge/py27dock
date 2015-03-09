@@ -12,7 +12,6 @@ RUN     sed -i 's/apply_updates = no/apply_updates = yes/' /etc/yum/yum-cron-hou
 ADD     bashrc.sh /
 RUN     cat /bashrc.sh >> /root/.bashrc
 RUN     rm /bashrc.sh
-CMD     ["/usr/bin/supervisord"]
 ADD     get-pip.py /
 RUN     mkdir /build
 ADD     gmp-6.0.0a.tar.bz2 /build
@@ -72,6 +71,8 @@ RUN     pip install pyasn1-modules
 RUN     pip install python-Levenshtein
 RUN     pip install python-vagrant
 RUN     pip install pytz
+RUN     yum install -y libyaml
+RUN     yum install -y libyaml-devel
 RUN     pip install PyYAML
 RUN     pip install requests
 RUN     pip install rsa
@@ -86,3 +87,4 @@ ADD     Dockerfile /
 ADD     cleanup.sh /
 RUN     /cleanup.sh
 WORKDIR /
+CMD     ["/usr/bin/supervisord"]
