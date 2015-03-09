@@ -1,4 +1,18 @@
 FROM    centos
+RUN     yum install -y epel-release && yum clean all
+RUN     yum -y update && yum clean all
+RUN     yum -y install supervisor cronie yum-cron && yum clean all
+ADD     supervisord.conf /etc/supervisord.conf
+ADD     crond.ini /etc/supervisord.d/crond.ini
+RUN     chmod 600 /etc/supervisord.conf /etc/supervisord.d/*.ini
+RUN     mkdir -p /var/lock/subsys
+RUN     touch /var/lock/subsys/yum-cron
+RUN     sed -i 's/apply_updates = no/apply_updates = yes/' /etc/yum/yum-cron.conf
+RUN     sed -i 's/apply_updates = no/apply_updates = yes/' /etc/yum/yum-cron-hourly.conf
+ADD     bashrc.sh /
+RUN     cat /bashrc.sh >> /root/.bashrc
+RUN     rm /bashrc.sh
+CMD     ["/usr/bin/supervisord"]
 ADD     get-pip.py /
 RUN     mkdir /build
 ADD     gmp-6.0.0a.tar.bz2 /build
@@ -47,4 +61,3 @@ ADD     Dockerfile /
 ADD     cleanup.sh /
 RUN     cleanup.sh
 WORKDIR /
-
