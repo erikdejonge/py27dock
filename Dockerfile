@@ -4,4 +4,5 @@ RUN pip install -U pip
 RUN pip install virtualenv
 ADD requirements.txt /
 ADD Dockerfile /
+RUN easy_install -U distribute
 RUN pip install -r /requirements.txt
