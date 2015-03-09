@@ -17,6 +17,7 @@ RUN     yum install -y zlib-devel.x86_64
 RUN     yum install -y python-devel
 RUN     yum install -y libffi-devel
 RUN     python /get-pip.py; rm -f /get-pip.*
+RUN     yum upgrade -y
 RUN     yum install -y pyOpenSSL.x86_64
 RUN     pip install multiprocessing
 RUN     pip install gevent
