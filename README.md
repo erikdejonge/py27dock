@@ -1,6 +1,11 @@
 # py27dock
 Python 2 container for python2.7 compatibility testing
 
+## alias
+```
+alias python2='docker run -it --rm erikdejonge/p27dock python'
+```
+
 ###Dockerfile
 https://github.com/erikdejonge/py27dock/blob/master/Dockerfile
 

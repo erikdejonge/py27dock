@@ -52,12 +52,37 @@ RUN     pip install pycrypto;
 RUN     yum install -y tar;
 RUN     yum install -y pigz;
 RUN     easy_install -U distribute
-RUN     pip install -r /requirements.txt
+RUN     pip install autopep8
+RUN     pip install docopt
+RUN     pip install ecdsa
+RUN     pip install future
+RUN     pip install gcloud
+RUN     pip install gitdb
+RUN     pip install GitPython
+RUN     pip install httplib2
+RUN     pip install ipython
+RUN     pip install oauth2client
+RUN     pip install paramiko
+RUN     pip install pbr
+RUN     pip install pep8
+RUN     pip install protobuf
+RUN     pip install psutil
+RUN     pip install pyasn1
+RUN     pip install pyasn1-modules
+RUN     pip install python-Levenshtein
+RUN     pip install python-vagrant
+RUN     pip install pytz
+RUN     pip install PyYAML
+RUN     pip install requests
+RUN     pip install rsa
+RUN     pip install schema
+RUN     pip install smmap
+RUN     pip install ujson
 RUN     rm -Rf /build;
 RUN     yum -y clean all;
 RUN     echo nameserver 8.8.8.8 > /etc/resolv.conf
 RUN     updatedb;
 ADD     Dockerfile /
 ADD     cleanup.sh /
-RUN     cleanup.sh
+RUN     /cleanup.sh
 WORKDIR /
