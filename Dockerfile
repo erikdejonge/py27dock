@@ -83,8 +83,12 @@ RUN     rm -Rf /build;
 RUN     yum -y clean all;
 RUN     echo nameserver 8.8.8.8 > /etc/resolv.conf
 RUN     updatedb;
-ADD     Dockerfile /
-ADD     cleanup.sh /
-RUN     /cleanup.sh
+RUN     yum remove -y kernel-debug-devel;
+RUN     yum remove -y kernel-headers;
+RUN     yum -y clean all;
+RUN     rpm -qa --queryformat '%10{size} - %-25{name} \t %{version}\n' | sort -n > /installed.txt
+RUN     yum -y remove gcc gcc-c++ cmake libyaml-devel gmp-devel binutils-devel boost-devel libmcrypt-devel libmemcached-devel jemalloc-devel libevent-devel sqlite-devel libxslt-devel libicu-devel tbb-devel libzip-devel mysql-devel bzip2-devel openldap-devel readline-devel elfutils-libelf-devel libcap-devel libyaml-devel libedit-devel lz4-devel libvpx-devel unixODBC-devel gmp-devel libpng-devel ImageMagick-devel expat-devel openssl-devel patch make libtool libidn-devel
+RUN     rm -Rf /build
 WORKDIR /
-CMD     ["/usr/bin/supervisord"]
+
+

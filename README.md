@@ -1,9 +1,14 @@
 # py27dock
 Python 2 container for python2.7 compatibility testing
 
+## execute
+```
+docker run -it --rm py27dock
+docker run -it --rm py27dock test.py
+```
 ## alias
 ```
-alias python2='docker run -it --rm erikdejonge/p27dock python'
+alias python2='docker run -it --rm py27dock'
 ```
 
 ###Dockerfile
